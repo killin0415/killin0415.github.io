@@ -1,6 +1,6 @@
 # Site navigation links
 
-- title:
-  url:
-  excerpt:
-  image:
+- title: dc bot
+  url: /dc_bot/
+  excerpt: "the dc bot tutorial"
+  image: dc_bot.png

@@ -23,3 +23,9 @@ layout: default
 		</div class="archive-wrap"><!-- /.archive-wrap -->
 	</div><!-- /.wrap -->
 </div><!-- /#main -->
+
+<div class="tiles">
+	{% for post in site.categories.dc_bot %}
+	  {% include post-list.html %}
+	{% endfor %}
+</div><!-- /.tiles -->

@@ -1,4 +1,4 @@
-I"[+<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
+I"*,<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
 
 <h6 id="tags-python-nextcord">tags: <code class="language-plaintext highlighter-rouge">python</code> <code class="language-plaintext highlighter-rouge">nextcord</code></h6>
 
@@ -19,8 +19,8 @@
 </ul>
 
 <h4 id="建立discord帳號及bot的註冊">建立discord帳號及bot的註冊</h4>
-<p>首先到 https://discord.com/login 且先建立discord帳號。
-再來到 https://discord.com/developers/applications 並在左上角找到 <strong>new application</strong> 的按鈕，點下去。</p>
+<p>首先到 <a href="https://discord.com/login">https://discord.com/login</a> 且先建立discord帳號。
+再來到 <a href="https://discord.com/developers/applications">https://discord.com/developers/applications</a> 並在左上角找到 <strong>new application</strong> 的按鈕，點下去。</p>
 
 <p>之後會進到取名的介面，這裡就是幫你的機器人取名的時間啦~~</p>
 
@@ -34,7 +34,7 @@
 
 <h4 id="下載nextcord-module">下載nextcord module</h4>
 
-<p>在下載之前，我想推薦一個方便管理code及架設機器人的地方，那就是repl.it https://replit.com/~
+<p>在下載之前，我想推薦一個方便管理code及架設機器人的地方，那就是repl.it <a href="https://replit.com/~">https://replit.com/~</a>
 repl是一個線上環境，可以用來架設機器人(但不怎麼安全就是了)，所以我推薦初學者可以在這裡寫你的機器人喔。(以下筆者將以repl為主要的coding環境)。
 首先，註冊帳號之後，在介面上找到create repl的按鈕，之後選擇python然後為你的專案命名，進去之後在左側的終端機的上面選擇shell後打上</p>
 <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">nextcord</span>
@@ -52,7 +52,7 @@ async(異步執行)，指讓程式模擬cpu中多執行緒的概念，在等待�
 <p><strong>API</strong>
 所謂API其實就是官方文件，讓我們可以查相關指令語法的地方，阿因為事全英文的，所以看不懂就沒辦法啦。
 以下是nextcord的官方文件
-https://nextcord.readthedocs.io/en/latest/api.html</p>
+<a href="https://nextcord.readthedocs.io/en/latest/api.html">https://nextcord.readthedocs.io/en/latest/api.html</a></p>
 
 <p>進入正題吧，要讓機器人上線了，那下面是我寫的ㄐ處功能，日後都可以再新增，也請各位看完之後試著自己寫出來(不要直接抄la)</p>
 
@@ -62,13 +62,13 @@ https://nextcord.readthedocs.io/en/latest/api.html</p>
   <li>在下面是一個檢視API有沒有被call太多次的一個小function，讀者可以直接抄過去，因為要解釋裡面的原理會讓篇幅過長w。(如果API被call太多次，他會告訴你要等幾分鐘)</li>
   <li>接下來我們來測試一下機器人，event的on_message會偵測discord裡的<strong>每一則訊息</strong>，對你沒聽錯w，他會將偵測到訊息放到一個msg的變數裡面，其中msg是nextcord其中的一個class。msg.content可以傳出這則訊息的內容，我們要做的就是判斷這個訊息，如果msg.content == ping，那機器人就會在這個msg所在的channel傳送一個pong訊息。</li>
   <li>最後我們要讓機器人上線啦，在先前應該有存下一串TOKEN，那我們在repl的左側找到一個鎖的圖案，他可以儲存這個專案的一些不可被公開的資料(因為repl的code是公開的)。那我們把key命名為TOKEN，並將剛剛那串複製到value的部分，add new secret之後就好了喔。</li>
-  <li>那我們在code裡面輸入
-    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">os</span>
- <span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'TOKEN'</span><span class="p">]</span>
+  <li>那我們在code裡面輸入(記得import os)
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'TOKEN'</span><span class="p">]</span>
 </code></pre></div>    </div>
+
     <p>就可以把剛剛那串從repl上存到TOKEN這個變數了喔。
-  最後我們讓client在這個TOKEN上運行，也就是</p>
-    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">client</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span>
+ 最後我們讓client在這個TOKEN上運行，也就是</p>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">client</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span>
 </code></pre></div>    </div>
     <p>就可以讓屬於自己的機器人在repl上運行了喔，是不是很棒！
 最後補充(欸原諒筆者屁話有點多)</p>
@@ -110,6 +110,7 @@ https://nextcord.readthedocs.io/en/latest/api.html</p>
 
 <p>好了，現在你已經寫出一隻屬於自己的機器人了，之後我們再來詳細介紹機器人的其他功能。</p>
 
-<p>筆者的dc: https://discord.gg/tfaFhg2u
-有問題都可以在這裡找我喔。</p>
+<p>筆者的dc: <a href="https://discord.gg/tfaFhg2u">https://discord.gg/tfaFhg2u</a></p>
+
+<p>有問題都可以在這裡找我喔。</p>
 :ET
