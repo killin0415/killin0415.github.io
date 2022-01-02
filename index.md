@@ -11,7 +11,7 @@ title: "about me"
 ### 個資.jpg
 * github: killin0415
 * dc: 一顆悠閒的麻糬#4852
-* instergram: killin
+* instergram: ks_killin
 * 個人dc server: <https://discord.gg/59s45PYDHD>
 
 ### 個人技能點
