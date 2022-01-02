@@ -1,9 +1,9 @@
 # Site wide configuration
 
-title: "My Site"
+title: "Potato Site"
 description: "This is a description of my awesome site."
-logo: # 120x120 px default image used for Twitter summary card
-teaser: # 400x250 px default teaser image used in image archive grid
+logo: neko.jpg
+teaser: teaser.jfif
 locale: en
 url: http://localhost:4000
 url: https://happypotato.ga
