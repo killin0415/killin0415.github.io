@@ -3,7 +3,7 @@ layout: media
 permalink: /
 title: "about me"
 ---
-# POTATO's WEBSITE
+
 
 ### 我是誰
 一顆來自高雄的馬鈴薯，喜歡玩遊戲跟寫程式，可以來找我聊天喔(´･ω･`)
