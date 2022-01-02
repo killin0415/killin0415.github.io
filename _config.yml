@@ -27,14 +27,14 @@ plugins:
 
 # Site owner
 owner:
-  name:
-  email:
+  name: potato
+  email: swordfire1000@gmail.com
   twitter:
   google:
     ad-client:
     ad-slot:
   bio:
-  avatar: bio-photo.jpg # 160x160 px image for author byline
+  avatar: avatar.png # 160x160 px image for author byline
   disqus-shortname:
 
 
