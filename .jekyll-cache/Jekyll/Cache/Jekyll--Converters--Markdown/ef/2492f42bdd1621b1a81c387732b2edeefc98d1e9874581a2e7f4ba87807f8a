@@ -1,4 +1,4 @@
-I"*,<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
+I"�,<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
 
 <h6 id="tags-python-nextcord">tags: <code class="language-plaintext highlighter-rouge">python</code> <code class="language-plaintext highlighter-rouge">nextcord</code></h6>
 
@@ -20,12 +20,15 @@
 
 <h4 id="建立discord帳號及bot的註冊">建立discord帳號及bot的註冊</h4>
 <p>首先到 <a href="https://discord.com/login">https://discord.com/login</a> 且先建立discord帳號。
-再來到 <a href="https://discord.com/developers/applications">https://discord.com/developers/applications</a> 並在左上角找到 <strong>new application</strong> 的按鈕，點下去。</p>
+再來到 <a href="https://discord.com/developers/applications">https://discord.com/developers/applications</a> 並在左上角找到 <strong>new application</strong> 的按鈕，點下去。
+<img src="/images/bot_day1/new application.png" alt="repo" />{}</p>
 
 <p>之後會進到取名的介面，這裡就是幫你的機器人取名的時間啦~~</p>
 
-<p>取名完後到左側找到bot的選項，再來點選add bot(應該會在右上角)，按 yes,do it!
-然後把下面所有有關intent的選項都打勾，這樣日後比較好操作
+<p>取名完後到左側找到bot的選項，再來點選add bot，按 yes,do it!
+<img src="/images/bot_day1/bot.png" alt="bot" /></p>
+
+<p>然後把下面所有有關intent的選項都打勾，這樣日後比較好操作
 最後在這個介面的最上面，username的下方找到TOKEN的選項，按copy貼到記事本就可以進行下一個步驟了。</p>
 
 <p>在左側找到OAuth2的選項，點開之後按URL Generator，找到bot的部分打勾(應該在中間的位置)，之後會看到bot permission，這裡是用來告訴伺服器你的機器人需要甚麼權限，初學者我建議選Administrator就好，選完之後下方會出現一個連結，那就是用來邀請你的機器人的連結，注意，一定要有伺服器的”管理者”權限才可以邀機器人。</p>
@@ -41,7 +44,7 @@ repl是一個線上環境，可以用來架設機器人(但不怎麼安全就是
 </code></pre></div></div>
 <p>等它一下，這樣就好嘍。</p>
 
-<p>又或者是在repl的做邊找到package的按鍵，搜尋nextcord案下載就好了喔(這方法在等下執行機器人之後會少一個步驟所以也可以用這個方法，但因為不是每個人都會用repl作為自己主力編寫程式的環境，所以筆者主要還是教一般的方法w
+<p>又或者是在repl的左邊找到package的按鍵，搜尋nextcord案下載就好了喔(這方法在等下執行機器人之後會少一個步驟所以也可以用這個方法，但因為不是每個人都會用repl作為自己主力編寫程式的環境，所以筆者主要還是教一般的方法w
 (btw 在本機要操作的話，打開cmd，再打上述的指令就行嘍)</p>
 
 <h4 id="讓機器人上線">讓機器人上線</h4>
@@ -50,7 +53,7 @@ repl是一個線上環境，可以用來架設機器人(但不怎麼安全就是
 async(異步執行)，指讓程式模擬cpu中多執行緒的概念，在等待網站回應的同時先做別的指令，白話文講，就是可以同時做很多件事情，discord bot也是以這個概念完成的。</p>
 
 <p><strong>API</strong>
-所謂API其實就是官方文件，讓我們可以查相關指令語法的地方，阿因為事全英文的，所以看不懂就沒辦法啦。
+所謂API其實就是官方文件，讓我們可以查相關指令語法的地方，阿因為是全英文的，所以看不懂就沒辦法啦。
 以下是nextcord的官方文件
 <a href="https://nextcord.readthedocs.io/en/latest/api.html">https://nextcord.readthedocs.io/en/latest/api.html</a></p>
 
