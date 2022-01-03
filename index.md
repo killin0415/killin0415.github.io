@@ -4,13 +4,15 @@ permalink: /
 title: "about me"
 ---
 
+
+
 ### 我是誰
 一顆來自高雄的馬鈴薯，喜歡玩遊戲跟寫程式，可以來找我聊天喔(´･ω･`)
 
 ### 個資.jpg
 * github: killin0415
 * dc: 一顆悠閒的麻糬#4852
-* instergram: killin
+* instergram: ks_killin
 * 個人dc server: <https://discord.gg/59s45PYDHD>
 
 ### 個人技能點
