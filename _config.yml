@@ -2,8 +2,8 @@
 
 title: "Potato Site"
 description: "This is a description of my awesome site."
-logo: neko.jpg
-teaser: teaser.jfif
+logo: potato.jpg
+teaser: 
 locale: en
 url: http://localhost:4000
 url: https://happypotato.ga

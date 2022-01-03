@@ -1,5 +1,5 @@
 ---
-layout: media
+layout: archive_1
 permalink: /
 title: "about me"
 ---
