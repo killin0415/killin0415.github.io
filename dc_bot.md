@@ -1,7 +1,7 @@
 ---
 title: dc bot
-layout: archive
+layout: archive_dc_bot
 permalink: /dc_bot/
 ---
 
-#### this is dc bot tutorial
+#### this is a dc bot tutorial
