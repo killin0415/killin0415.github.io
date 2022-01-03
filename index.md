@@ -60,7 +60,7 @@ title: "about me"
 * 2021/12/17 口罩辨識 by VGG16
 * 2022/01/01 個人靜態網頁 by github pages
 
-### 2022目標
+### 2022目標(last edit: 2022/01/01)
 1. 在kaggle上刷五題以上
 2. 完成dc bot 教學並部署到github pages上
 3. 介紹CNN並部署到github pages上
