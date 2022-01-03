@@ -1,6 +1,6 @@
-I"P.<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
+I"�.<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
 
-<h6 id="tags-python-nextcord">tags: <code class="language-plaintext highlighter-rouge">python</code> <code class="language-plaintext highlighter-rouge">nextcord</code></h6>
+<h6 id="tags-day-1-python-nextcord">tags: <code class="language-plaintext highlighter-rouge">day 1</code> <code class="language-plaintext highlighter-rouge">python</code> <code class="language-plaintext highlighter-rouge">nextcord</code></h6>
 
 <blockquote>
   <p>此教程適合給已知python基礎及物件導向概念的人使用
@@ -10,7 +10,7 @@
 <h2 id="什麼是discord-bot-與-nextcord">什麼是discord bot 與 nextcord</h2>
 <p>discord bot 是專門在discord伺服器上運行的機器人，而 nextcord 是別人寫好的函式庫，用來與 discord 伺服器對接的一個橋樑。</p>
 
-<h3 id="step-1-建立一隻機器人">Step 1: 建立一隻機器人</h3>
+<h3 id="建立一隻機器人">建立一隻機器人</h3>
 
 <ul class="task-list">
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />建立discord帳號及bot的註冊</li>

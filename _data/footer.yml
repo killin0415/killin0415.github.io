@@ -1,4 +1,7 @@
 # Footer navigation links
 
-- title:
-  url:
+- title: << back to main site
+  url: /
+
+- title: dc server
+  url: https://discord.gg/59s45PYDHD

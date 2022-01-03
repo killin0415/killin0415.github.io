@@ -1,0 +1,64 @@
+I"�<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
+
+<h6 id="tags-day-2-python-nextcord-event-on-message">tags: <code class="language-plaintext highlighter-rouge">day 2</code> <code class="language-plaintext highlighter-rouge">python</code> <code class="language-plaintext highlighter-rouge">nextcord</code> <code class="language-plaintext highlighter-rouge">event</code> <code class="language-plaintext highlighter-rouge">on message</code></h6>
+
+<h2 id="建立偵測訊息的功能">建立偵測訊息的功能</h2>
+
+<p>筆者在編寫此篇時是2022/01/03，且discord官方將在2022/04/30的時後禁止機器人監聽聊天室的功能，不過，此設定僅限於在100個伺服器以上工作的機器人，所以各位不用擔心唷w。</p>
+
+<p>回到正題，今天我們要做的是監測訊息的功能，相信大家一定很常看到以下的對話。
+<img src="/images/bot_day_2/response.png" alt="response" /></p>
+
+<p>那這種對話要怎麼寫呢?</p>
+
+<p>回到上次講的，<code class="language-plaintext highlighter-rouge">@client.event</code> 裡給的 <code class="language-plaintext highlighter-rouge">message</code>其實是一個class，其中存了很多屬性例如content, guild等等，所以我們要做得很簡單，只要偵測content，也就是message的內容(或者是說這則訊息)就好。
+假設我們要偵測ping並且回覆pong的話要怎麼做呢？</p>
+<ol>
+  <li>偵測訊息</li>
+  <li>判斷訊息</li>
+  <li>找到訊息的頻道</li>
+  <li>發送訊息</li>
+</ol>
+
+<p>我們剛剛已經知道message.content可以給我們這則訊息麻，所以只要</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">message</span><span class="p">.</span><span class="n">content</span> <span class="o">==</span> <span class="s">"ping"</span>
+</code></pre></div></div>
+<p>就可以完成判斷了對吧！</p>
+
+<p>接下來，要怎麼知道訊息來自哪裡呢？透過api我們可以看到 message.channel可以得到訊息來自的頻道，其中channel是一個TextChannel的class，那我們使用TextChannel.send就可以達成目標了！
+<img src="/images/bot_day_2/response.png" alt="response" /></p>
+
+<p>所以，以下是完整程式碼</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">nextcord</span>
+<span class="kn">from</span> <span class="nn">nextcord.ext</span> <span class="kn">import</span> <span class="n">commands</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">intents</span> <span class="o">=</span> <span class="n">nextcord</span><span class="p">.</span><span class="n">Intents</span><span class="p">.</span><span class="nb">all</span><span class="p">()</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">commands</span><span class="p">.</span><span class="n">Bot</span><span class="p">(</span><span class="n">command_prefix</span><span class="o">=</span><span class="s">'--'</span><span class="p">,</span> <span class="n">intents</span><span class="o">=</span><span class="n">intents</span><span class="p">)</span>
+<span class="n">client</span><span class="p">.</span><span class="n">remove_command</span><span class="p">(</span><span class="s">'help'</span><span class="p">)</span>
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'TOKEN'</span><span class="p">]</span>
+
+<span class="o">@</span><span class="n">client</span><span class="p">.</span><span class="n">event</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">on_ready</span><span class="p">():</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">'&gt;&gt; Bot is online '</span><span class="p">)</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s">"https://discord.com/api/v1"</span><span class="p">)</span>
+  <span class="k">try</span><span class="p">:</span>
+      <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Rate limit </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'Retry-After'</span><span class="p">])</span> <span class="o">/</span> <span class="mi">60</span><span class="si">}</span><span class="s"> minutes left"</span><span class="p">)</span>
+  <span class="k">except</span><span class="p">:</span>
+      <span class="k">print</span><span class="p">(</span><span class="s">"No rate limit"</span><span class="p">)</span>
+      
+
+<span class="o">@</span><span class="n">client</span><span class="p">.</span><span class="n">event</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">msg</span><span class="p">.</span><span class="n">content</span> <span class="o">==</span> <span class="s">"ping"</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">msg</span><span class="p">.</span><span class="n">channel</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="s">"pong"</span><span class="p">)</span> 
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+  <span class="n">client</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>這次我們主要著重在on_message的用法，那其他用法如果日後有用到都會再提，那其他的問題不妨到筆者的dc問喔(主頁有連結awa)</p>
+
+:ET
