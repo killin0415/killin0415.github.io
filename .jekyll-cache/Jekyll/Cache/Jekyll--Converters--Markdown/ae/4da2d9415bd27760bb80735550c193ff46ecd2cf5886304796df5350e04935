@@ -1,0 +1,216 @@
+I"WD<h6 id="tags-apcscamp-week1-資料結構">tags: <code class="language-plaintext highlighter-rouge">APCScamp week1</code> <code class="language-plaintext highlighter-rouge">資料結構</code></h6>
+
+<h2 id="資料結構">資料結構</h2>
+
+<h5 id="資料結構可以有效的幫我們存取資料不同的題目需要不同的資料結構來存取以下介紹幾個資料結構stackqueuedequepriority_queuesetmap等c有stl資料庫可以供我們使用這些資料結構不需要自己手刻">資料結構可以有效的幫我們存取資料，不同的題目需要不同的資料結構來存取，以下介紹幾個資料結構：stack、queue、deque、priority_queue、set、map等。c++有STL資料庫可以供我們使用這些資料結構，不需要自己手刻。</h5>
+
+<h3 id="stack">stack</h3>
+
+<p>stack(堆疊)是一種後進先出的資料結構(LIFO)，需要支援以下操作：</p>
+
+<ol>
+  <li>stk.top()回傳stack中最上面的元素</li>
+  <li>stk.pop()將最上面的元素移除</li>
+  <li>stk.push()將元素移入stack裡</li>
+  <li>stk.size()回傳stack當前的大小</li>
+  <li>stk.empty()回傳一個bool值，如果當前stack為空回傳true，反之回傳false。</li>
+</ol>
+
+<hr />
+<p>EX：
+給定一個字串，若有任何相鄰的字元相同，就會被消掉。舉例來說，假設一開始的字串是 cabbab：</p>
+
+<p>cabbab -&gt; caab -&gt; cb
+第一步中中間有兩個 b 相鄰，消掉後又有兩個 a 相鄰，最後剩下 cb。</p>
+
+<p>輸入只有一行S長度不會超過200000，只由小寫英文字母組成。
+輸出字串運算後的結果。
+—</p>
+
+<p>只要相鄰兩個就刪除，乍看之下可以O(\(N^2\))爆搜，可是這樣複雜度會爛掉，再仔細看一下，其實就是括號匹配的弱化版！</p>
+
+<p>從字串由由左往右掃，每次把元素丟到stack裡，遇到相同的就pop掉
+這樣就達到O(n)操作了！</p>
+
+<hr />
+<p>以下是程式碼：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;bits/stdc++.h&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="cp">#define potato ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
+#define pb emplace_back
+#define mp make_pair
+#define pii pair&lt;int,int&gt;
+</span>
+<span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">s</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="s">""</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">potato</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="p">;</span><span class="c1">//輸入字串</span>
+    <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">stk</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="c1">//如果stack不為空且當目前輸入與stack最上層相同時，把上層元素pop掉。</span>
+            <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="k">else</span>    
+            <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="c1">//否則把目前元素push進去。</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">stk</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">l</span><span class="o">+=</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">();</span><span class="c1">//將stack字元加入l字串</span>
+        <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">reverse</span><span class="p">(</span><span class="n">l</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">l</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="c1">//由於stack pop出來的是反過來的，所以要reverse。</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">l</span><span class="o">&lt;&lt;</span><span class="sc">'\n'</span><span class="p">;</span><span class="c1">//輸出並換行</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+<h3 id="queue">queue</h3>
+<p>queue(佇列)是一種先進先出的資料結構(FIFO)，需要支援以下操作：</p>
+
+<ol>
+  <li>que.front()回傳stack中最前面的元素</li>
+  <li>que.pop()將最上面的元素移除</li>
+  <li>que.push()將元素移入queue裡</li>
+  <li>que.size()回傳queue當前的大小</li>
+  <li>que.empty()回傳一個bool值，如果當前queue為空回傳true，反之回傳false。</li>
+</ol>
+
+<hr />
+
+<p>EX：
+每次進行：(1)將最上面的一張牌捨棄掉
+        (2)將現在牌組最上面的一張牌移動至牌組最下方</p>
+
+<hr />
+<p>假設第i次操作的時候捨棄掉的牌的編號為Ai，那草原戰士們想要你回答Q個問題，每次會問一個m，問你Am的值為多少？</p>
+
+<hr />
+<p>輸入將有2行。第一行將有兩個正整數N，Q，代表有幾張牌和有幾個問題要回答。第二行有Q個數字，第i個是Mi，代表一次詢問。</p>
+
+<p>請輸出Q行，每一行代表A Mi。</p>
+
+<hr />
+<p>這題主要是將一堆卡牌進行以上的操作之後問第m次操作後所取出的卡牌，由於每次會取出最上面的卡牌並將下一張卡牌塞到下面，因此，我們可以使用queue的資料結構來處理這題。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;bits/stdc++.h&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="cp">#define potato ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define mp make_pair
+#define pii pair&lt;int,int&gt;
+</span>
+
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
+<span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">que</span><span class="p">;</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">potato</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span><span class="c1">//初始化一組有n張的卡牌</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">pb</span><span class="p">(</span><span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">());</span><span class="c1">//紀錄第i次操作所取出的卡牌</span>
+        <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">());</span><span class="c1">//取出後將下一張卡牌塞進queue的最後面</span>
+        <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">vec</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">'\n'</span><span class="p">;</span><span class="c1">//由於記錄第i次操作的vector是0 base，而題目的要求是1 base，所以將題目要求-1後輸出並換行</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="err">}</span>
+</code></pre></div></div>
+
+<h3 id="deque">deque</h3>
+
+<p>deque(雙端佇列)是一種結合vector跟stack跟queue特性的一種容器，一個deque可以支援以下操作：</p>
+
+<ol>
+  <li>新增、存取、刪除deque後端的資料</li>
+  <li>新增、存取、刪除deque前端的資料</li>
+</ol>
+
+<hr />
+<p>給定一串長度為n的序列，求i|i&lt;=n-k+1中，所有[i,i+k]的最大值。
+其中1&lt;=k&lt;=n&lt;10^6</p>
+
+<hr />
+<p>對於這題，雖然我們可以從0~n-k做一次max_element，但顯然這複雜度是糟的，因為max_element的複雜度為O(K)，整體複雜度為O(NK)，顯然是糟的。我們重複比較過多次相同的元素，即使他不能是我要的，因此我們需要一個資料結構來維持其”單調性”，那因為它是一個區間，我們沒有辦法透過priority_queue(後面會提到)來維護，因此我們可以透過頭尾控制這個區間，當目前的最大值超過我要的區間就pop掉，即為”隊列”，即為’單調對列’。</p>
+
+<hr />
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;bits/stdc++.h&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+
+<span class="cp">#define potato ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
+#define pb emplace_back
+#define mp make_pair
+#define pii pair&lt;int,int&gt;
+#define MOD 1000000009
+</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">pep</span><span class="p">,</span><span class="n">tar</span><span class="p">,</span><span class="n">pivot</span><span class="p">;</span>
+<span class="n">deque</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">potato</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vec</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">vec</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="o">+</span><span class="n">k</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">)</span> <span class="n">vec</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span><span class="c1">//如果當前最大值已經超過目前的範圍就pop掉</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">pep</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">vec</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">vec</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">first</span><span class="o">&lt;</span><span class="n">pep</span><span class="p">)</span><span class="n">vec</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span><span class="c1">//維護deque單調性(即使其保持大到小的排序)</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">mp</span><span class="p">(</span><span class="n">pep</span><span class="p">,</span><span class="n">i</span><span class="p">));</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">vec</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span><span class="c1">//輸出前最大值</span>
+
+    <span class="p">}</span>    
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="堆疊heappriority_queue">堆疊(heap、priority_queue)</h3>
+
+<p>heap又稱priority_queue(簡稱pq)，是一種能維護極值的資料結構，支援新增、刪除元素到pq頂端，其中每項操作皆為O(logn)，可以自定義比較函數或是使用內建函式達到維護最大值(或最小值)的作用。</p>
+
+<p>通常pq都會跟著greedy演算法使用，因此例題到後面再講www。</p>
+
+<h3 id="setmap">set、map</h3>
+
+<p>set(集合)，map(映射)皆為唯一性且排序過的資料結構，若不想要其唯一性也可使用multi_set，multi_map等(但multi_map很雞肋就是了)。</p>
+
+<h4 id="set">set</h4>
+<p>顧名思義，可在裡面存取元素且不重複，支援以下操作：</p>
+<ol>
+  <li>s.insert(value)、s.erase(value) 新增、刪除資料</li>
+  <li>s.find(value) 回傳value所在的iterator，若不存在則回傳s.end()</li>
+  <li>s.count(value) 回傳value的個數，在set只回傳0 or 1</li>
+</ol>
+
+<h4 id="map">map</h4>
+<p>如同數學上的函數定義，由一個key映照到value上，其中一個key只會映照到一個value上，支援以下操作：</p>
+<ol>
+  <li>mp[key]=value 將key映照到value上</li>
+  <li>mp.erase(value) 同set</li>
+  <li>mp.find(value) mp.count(value)同set</li>
+</ol>
+
+<p>一樣沒有例題(我真的找不到好的例題嗚嗚嗚)</p>
+
+:ET

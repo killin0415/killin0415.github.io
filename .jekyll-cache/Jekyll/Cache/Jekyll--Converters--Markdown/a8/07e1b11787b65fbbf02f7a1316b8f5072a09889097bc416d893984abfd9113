@@ -1,0 +1,80 @@
+I"'<h6 id="tagsapcscamp-week1-時間複雜度--貪婪演算法greedy">tags:<code class="language-plaintext highlighter-rouge">APCScamp week1</code> <code class="language-plaintext highlighter-rouge">時間複雜度</code>  <code class="language-plaintext highlighter-rouge">貪婪演算法(greedy)</code></h6>
+
+<hr />
+
+<h4 id="時間複雜度是一個估程式運行時間的方法在解一些難題時某些方法往往會因為時間問題而導致tle因此估出一個好的時間複雜度是我們在優化程式的時候不可或缺的判斷因素">時間複雜度是一個估程式運行時間的方法，在解一些難題時，某些方法往往會因為時間問題而導致TLE，因此，估出一個好的時間複雜度是我們在優化程式的時候，不可或缺的判斷因素。</h4>
+
+<h5 id="定義ok其中k為此程式在最壞情況下所運行的時間且將其寫成一個函式並將最高次項或影響最大的項次令為k係數可以省略">定義O(K)其中K為此程式在最壞情況下所運行的時間，且將其寫成一個函式並將最高次項(或影響最大的項次令為K)，係數可以省略。</h5>
+<p>對於每個程式，其中基本操作如：算術運算、比較、賦值等皆為O(1)的操作，大部分時間都會落在迴圈、遞迴、及資料結構的操作上，如單層迴圈的複雜度為O(N)，雙層為O(\(N^2\)) 等，若一個程式的運行時間為\(3n^2 * n^2 * 2\)，其最高項為\(3n^2$ ，係數忽略後我們可以將其複雜度寫成O(\)N^2$$)。此外，一般judge一秒可以跑10^8 筆整數運算，在寫的時候可以稍微估一下時間。</p>
+
+<h3 id="雙指針two-pointer又名slide-windows">雙指針(two pointer,又名slide windows)</h3>
+<p>雙指針是一個能將O(\(N^2\))的程式改寫為O(N)的技巧，使用時機為當左指針遞增時，右指針只會遞增或遞減時使用。</p>
+
+<hr />
+<p>EX:
+給定一串字串，求最短的子字串包含所有小寫英文字母。
+如果有多個最短的子字串，請輸出第一次出現的。如果這種子字串不存在，請輸出 QQ。</p>
+
+<hr />
+
+<p>那這題我們可以發現，當我們定住左指針時，右指針一定會遞增，否則一定不會包含26個字母，因此這題就是一個典型的雙指針題型。</p>
+
+<hr />
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;bits/stdc++.h&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="cp">#define potato ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
+#define pb emplace_back
+#define mp make_pair
+#define pii pair&lt;int,int&gt;
+</span>
+<span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cnt</span><span class="p">;</span><span class="c1">//cnt紀錄目前英文字母相異的個數</span>
+<span class="kt">int</span> <span class="n">ans</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000000</span><span class="p">};</span>
+<span class="n">string</span> <span class="n">n</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span> <span class="c1">//字串長度</span>
+    <span class="n">cnt</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span><span class="c1">//記錄左指針的英文字母</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">l</span><span class="o">&lt;</span><span class="n">n</span><span class="p">.</span><span class="n">length</span><span class="p">();</span><span class="n">l</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span> 
+        <span class="k">while</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;</span><span class="n">n</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">cnt</span><span class="o">&lt;</span><span class="mi">26</span><span class="p">)</span>
+        <span class="p">{</span> 
+            <span class="n">r</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">cnt</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span><span class="c1">//如果未出現過就將cnt+1</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cnt</span><span class="o">&lt;</span><span class="mi">26</span><span class="p">)</span><span class="c1">//如果跳出while迴圈但cnt仍&lt;26代表r跑到底且l到r不存在26個相異字母</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">!=</span><span class="mi">1000001</span><span class="p">)</span><span class="c1">//如果之前有找到存在26個相異字母的子字串則跳出while迴圈且輸出</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"QQ"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="c1">// 否則cout&lt;&lt;QQ並結束程式         </span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">&lt;</span><span class="n">ans</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="c1">//判斷當前字串的長度有沒有比上一個字串短並更新l跟r的數值</span>
+        <span class="p">{</span>
+            <span class="n">ans</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">r</span><span class="p">;</span>
+            <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">l</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span><span class="c1">//將目前l所在字母的出現次數-1，如果移除後當前字串不存在26個字母，就將cnt-1</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cnt</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="cp">#     for (int i=ans[0];i&lt;=ans[1];i++)//輸出字串
+</span>    <span class="p">{</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> 
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+:ET
