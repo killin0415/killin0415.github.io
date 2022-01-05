@@ -385,6 +385,15 @@ nav {
   a {
     text-decoration: none;
   }
+  
+}
+
+.teaser {
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  height: 110px; 
+	  width: auto;
 }
 
 /*

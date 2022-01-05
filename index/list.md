@@ -1,8 +1,8 @@
 ---
-title: catalog
+title: contents
 layout: archive_list
 categories: none
-permalink: /catalog/
+permalink: /contents/
 ---
 
 #### 文章目錄

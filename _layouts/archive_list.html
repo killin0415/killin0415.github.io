@@ -21,7 +21,7 @@ layout: default
 				{{ content }}
 			</div><!-- /.page-content -->
             <div class="tiles">
-                {% for post in site.categories.dc_bot %}
+                {% for post in site.categories.list %}
                 {% include post-list.html %}
                 {% endfor %}
             </div><!-- /.tiles -->

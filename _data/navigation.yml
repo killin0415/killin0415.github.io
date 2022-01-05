@@ -1,11 +1,21 @@
 # Site navigation links
 
+- title: contents
+  url: /contents/
+  excerpt: 目錄
+  image: contents.png
+  
 - title: dc bot
   url: /dc_bot/
   excerpt: "the dc bot tutorial"
   image: dc_bot.png
 
-- title: catalog
-  url: /catalog/
-  excerpt: 目錄
+- title: CP
+  url: /cp/
+  excerpt: "the dc bot tutorial"
+  image: programing.png
+
+
+
+
   
