@@ -1,0 +1,24 @@
+I"<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
+
+<h6 id="tags-day-3-python-nextcord--command">tags: <code class="language-plaintext highlighter-rouge">day 3</code> <code class="language-plaintext highlighter-rouge">python</code> <code class="language-plaintext highlighter-rouge">nextcord</code> ` command`</h6>
+
+<h2 id="建立第一個指令">建立第一個指令</h2>
+<p>從之前到現在我們只有讓機器人偵測我們發送的訊息，但相信大家常常看到MEE6的<code class="language-plaintext highlighter-rouge">!rank</code>可以查詢等級等<strong>指令</strong>，那實際上該怎麼操作呢？</p>
+
+<p>還記得day 1的code嗎？上面有一行<code class="language-plaintext highlighter-rouge">client = commands.Bot(command_prefix='--', intents=intents)</code>，這個就是指定我們的機器人要認什麼前綴，以上面來說它就會把<code class="language-plaintext highlighter-rouge">--</code>當作它的前綴並判斷後面的字來決定他要用哪個function。</p>
+
+<p>首先，我們要加上一個裝飾器<code class="language-plaintext highlighter-rouge">@client.command()</code>來告訴程式這個裝飾器以下的是一個指令，那接下來我們要定義這個function，名字就是這個指令的名字。</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="n">intents</span> <span class="o">=</span> <span class="n">nextcord</span><span class="p">.</span><span class="n">Intents</span><span class="p">.</span><span class="nb">all</span><span class="p">()</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">commands</span><span class="p">.</span><span class="n">Bot</span><span class="p">(</span><span class="n">command_prefix</span><span class="o">=</span><span class="s">'--'</span><span class="p">,</span> <span class="n">intents</span><span class="o">=</span><span class="n">intents</span><span class="p">)</span>
+
+<span class="p">...</span>
+<span class="o">@</span><span class="n">client</span><span class="p">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">ctx</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">latency</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s"> (ms)'</span><span class="p">)</span>
+<span class="p">...</span>
+
+</code></pre></div></div>
+<p>那以上的code，其中ping就是我們指令的名字，會以<code class="language-plaintext highlighter-rouge">--ping</code>來觸發，<code class="language-plaintext highlighter-rouge">ctx</code>是指這則訊息的<strong>上下文</strong>，這裡姑且可以把它當之前的msg.channel來用，不過ctx這個class也有其他的參數可以用，那這裡先不提，有興趣的讀者可以自己去API查看，</p>
+
+:ET
