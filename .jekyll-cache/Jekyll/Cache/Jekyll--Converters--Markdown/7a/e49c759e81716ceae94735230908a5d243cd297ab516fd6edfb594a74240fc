@@ -1,0 +1,31 @@
+I".<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
+
+<h6 id="tags-day-4-python-nextcord--keep_alive">tags: <code class="language-plaintext highlighter-rouge">day 4</code> <code class="language-plaintext highlighter-rouge">python</code> <code class="language-plaintext highlighter-rouge">nextcord</code> ` keep_alive`</h6>
+
+<h2 id="keep_alive">keep_alive</h2>
+<blockquote>
+  <p>以下code完全參照 <a href="https://reurl.cc/MZ45yW">[Proladon] Code a discord bot - 如何讓Discord Bot 24小時在線</a></p>
+  <ol>
+    <li>在根目錄下新增keep_alive.py這個檔案並打上
+ ```py
+ from flask import Flask
+ from threading import Thread</li>
+  </ol>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app = Flask('')
+
+@app.route('/')
+def main():
+    return 'Bot is aLive!'
+
+def run():
+    app.run(host="0.0.0.0", port=8080)
+
+def keep_alive():
+    server = Thread(target=run)
+    server.start()
+``` 2. 在最上面`import keep_alive`並ㄗ
+</code></pre></div></div>
+
+:ET

@@ -1,0 +1,51 @@
+I"�<h1 id="從零開始開發discord機器人">從零開始開發discord機器人</h1>
+
+<h6 id="tags-day-4-python-nextcord--keep_alive">tags: <code class="language-plaintext highlighter-rouge">day 4</code> <code class="language-plaintext highlighter-rouge">python</code> <code class="language-plaintext highlighter-rouge">nextcord</code> ` keep_alive`</h6>
+
+<h2 id="keep_alive">keep_alive</h2>
+<h6 id="以下code完全參照-proladon-code-a-discord-bot---如何讓discord-bot-24小時在線">以下code完全參照 <a href="https://reurl.cc/MZ45yW">[Proladon] Code a discord bot - 如何讓Discord Bot 24小時在線</a></h6>
+
+<ol>
+  <li>在根目錄下新增keep_alive.py這個檔案並打上</li>
+</ol>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">'Bot is aLive!'</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">"0.0.0.0"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8080</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">keep_alive</span><span class="p">():</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run</span><span class="p">)</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+</code></pre></div></div>
+<ol>
+  <li>在最上面<code class="language-plaintext highlighter-rouge">import keep_alive</code>並在client.run上面打上keep_alive.keep_alive()，如下</li>
+</ol>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">nextcord</span>
+<span class="kn">from</span> <span class="nn">nextcord.ext</span> <span class="kn">import</span> <span class="n">commands</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">keep_alive</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+  <span class="n">keep_alive</span><span class="p">.</span><span class="n">keep_alive</span><span class="p">()</span> 
+  <span class="n">client</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span>
+</code></pre></div></div>
+<p>之後按下run，第一次需要下載套件所以會慢一點w</p>
+
+<ol>
+  <li>進入監控 bot 的 <a href="https://uptimerobot.com/">網站</a> ，註冊並登入帳號。</li>
+  <li>點擊左上角 <code class="language-plaintext highlighter-rouge">+Add New Monitor，Monitor</code> Type 選 <code class="language-plaintext highlighter-rouge">HTTP(s)</code>，<code class="language-plaintext highlighter-rouge">URL (or IP)</code> 貼 repl 右上方的網址 (如下圖 1.)，<code class="language-plaintext highlighter-rouge">Monitoring Interval</code> 是 監控間隔，用1hr左右就好，<code class="language-plaintext highlighter-rouge">Select "Alert Contacts To Notify"</code> 是 bot 有離線或重新上線是否需要 <code class="language-plaintext highlighter-rouge">email</code> 通知，視個人決定要不要勾選。最後會變成如下圖 2.，按下 Create Monitor。 (第一次需要一點時間抓取資料，要等會兒)</li>
+</ol>
+
+<p><a href="/images/bot_day_4/bot_url.png">bot_url</a>
+[monitor]</p>
+:ET
