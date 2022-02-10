@@ -15,6 +15,11 @@
   excerpt: "the introdoction of algorithm and data structures in competitive programming"
   image: programing.png
 
+- title: weekly report
+  url: /weeklyreport/
+  excerpt: the weekly report
+  image: clock.png
+
 
 
 

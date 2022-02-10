@@ -15,16 +15,16 @@ title: "about me"
 * instergram: ks_killin
 * 個人dc server: <https://discord.gg/59s45PYDHD>
 
-### 個人技能點
-* python 熟練
-* c++ 略懂
-* 網頁前端 略懂
-* 後端 略懂
-* AI 略懂
-* 競程 略懂
-* git 略懂
-* PPT/word/excel 略懂
-* 會一點電腦硬體知識
+### 個人技能點(1-5)
+* python 4
+* c++ 2
+* 網頁前端 1
+* 後端 2
+* AI 3
+* 競程 3
+* git 1
+* PPT/word/excel 2
+* 電腦硬體知識 1
 
 
 ### 遊戲技能點
