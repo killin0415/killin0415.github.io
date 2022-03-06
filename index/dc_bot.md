@@ -4,4 +4,4 @@ layout: archive_dc_bot
 permalink: /dc_bot/
 ---
 
-#### this is a dc bot tutorial
+#### 從零開始開發discord機器人

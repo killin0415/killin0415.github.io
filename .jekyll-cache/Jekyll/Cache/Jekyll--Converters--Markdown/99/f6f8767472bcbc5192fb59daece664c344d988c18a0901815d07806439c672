@@ -1,4 +1,4 @@
-I"qD<h6 id="tags-apcscamp-week1-資料結構">tags: <code class="language-plaintext highlighter-rouge">APCScamp week1</code> <code class="language-plaintext highlighter-rouge">資料結構</code></h6>
+I"RD<h6 id="tags-apcscamp-week1-資料結構">tags: <code class="language-plaintext highlighter-rouge">APCScamp week1</code> <code class="language-plaintext highlighter-rouge">資料結構</code></h6>
 
 <h2 id="資料結構">資料結構</h2>
 
@@ -186,7 +186,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h3 id="堆疊heappriority_queue">堆疊(heap、priority_queue)</h3>
+<h3 id="堆疊heap">堆疊(heap)</h3>
 
 <p>heap又稱priority_queue(簡稱pq)，是一種能維護極值的資料結構，支援新增、刪除元素到pq頂端，其中每項操作皆為O(logn)，可以自定義比較函數或是使用內建函式達到維護最大值(或最小值)的作用。</p>
 
